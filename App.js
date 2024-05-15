@@ -12,8 +12,8 @@ function HomeScreen({ navigation }) {
     </Summer>
   );
 }
-// function HomeScreen navigation
 
+// function HomeScreen navigation
 export default function App() {
   return (
     <NavigationContainer styles={styles.navigation}>
