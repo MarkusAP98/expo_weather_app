@@ -1,12 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button, Alert } from "react-native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { NavigationContainer } from "@react-navigation/native";
 import { Winter, Spring, Summer, Fall } from "./components/Background";
 
-export default function App() {
+const Drawer = createDrawerNavigator();
+function HomeScreen({ navigation }) {
   return (
     <Fall>
-      <Text>App</Text>
+      <Text>Home Screen</Text>
     </Fall>
+  );
+}
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        {/* Add the other screens here */}
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 }
 
