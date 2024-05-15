@@ -1,12 +1,13 @@
 // components/Seasons/Summer.js
-import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { Animated, StyleSheet, Text, View } from "react-native";
 
-export default function Summer({ children }) {
+export default function Summer({ children, spin }) {
   return (
     <View style={styles.background}>
       {children}
-      <Text style={styles.sun}>☀️</Text>
+      <Animated.Text style={{ ...styles.sun, transform: [{ rotate: spin }] }}>
+        ☀️
+      </Animated.Text>
     </View>
   );
 }
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     flex: 1,
-    backgroundColor: "yellow",
+    backgroundColor: "aqua",
     justifyContent: "center",
     alignItems: "center",
   },
