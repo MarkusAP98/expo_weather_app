@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, Button, Alert } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
-import { Winter, Spring, Summer, Fall } from "./components/Background";
+import { Winter, Spring, Summer, Fall, ChangeBackground } from "./components";
 
 const Drawer = createDrawerNavigator();
 function HomeScreen({ navigation }) {
   return (
-    <Fall>
+    <Summer>
       <Text>Home Screen</Text>
-    </Fall>
+    </Summer>
   );
 }
 export default function App() {
@@ -17,15 +17,11 @@ export default function App() {
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="Home">
         <Drawer.Screen name="Home" component={HomeScreen} />
-        {/* Add the other screens here */}
+        <Drawer.Screen name="Change Background" component={ChangeBackground} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    zIndex: 1,
-  },
 });
