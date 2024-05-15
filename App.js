@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
-import { Winter, Spring, Summer, Fall } from "./components";
+import { Winter, Spring, Summer, Fall, Weather } from "./components";
 
 const Drawer = createDrawerNavigator();
 
@@ -18,6 +18,7 @@ function HomeScreen({ navigation, spin }) {
   return (
     <Summer spin={spin}>
       <Text>Home Screen</Text>
+      <Weather />
     </Summer>
   );
 }
