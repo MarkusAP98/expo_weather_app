@@ -1,19 +1,6 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import Spring from "./Seasons/Spring";
+import Summer from "./Seasons/Summer";
+import Winter from "./Seasons/Winter";
+import Fall from "./Seasons/Fall";
 
-const Background = () => {
-  return (
-    <View style={styles.container}>
-        <Text>Background</Text>
-    </View>
-  );
-};
-
-export default Background;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    zIndex: -1,
-  },
-});
+export { Spring, Summer, Winter, Fall };

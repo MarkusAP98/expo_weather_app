@@ -1,14 +1,15 @@
+// components/Seasons/Summer.js
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 
-export default function Winter({ children }) {
+export default function Summer({ children }) {
   return <View style={styles.background}>{children}</View>;
 }
 
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "yellow",
     justifyContent: "center",
     alignItems: "center",
   },

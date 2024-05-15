@@ -1,14 +1,14 @@
+import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
 
-export default function Winter({ children }) {
+export default function Fall({ children }) {
   return <View style={styles.background}>{children}</View>;
 }
 
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "orange",
     justifyContent: "center",
     alignItems: "center",
   },
