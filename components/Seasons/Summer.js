@@ -9,7 +9,7 @@ export default function Summer({ children, spin }) {
       Animated.sequence([
         Animated.timing(cloudAnim, {
           toValue: 1,
-          duration: 5000,
+          duration: 15000,
           useNativeDriver: true,
         }),
         Animated.timing(cloudAnim, {
