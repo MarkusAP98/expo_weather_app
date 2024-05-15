@@ -12,10 +12,12 @@ function HomeScreen({ navigation }) {
     </Summer>
   );
 }
+// function HomeScreen navigation
+
 export default function App() {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
+    <NavigationContainer styles={styles.navigation}>
+      <Drawer.Navigator initialRouteName="Home" drawerStyle={{ backgroundColor: 'red' }}>
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Change Background" component={ChangeBackground} />
       </Drawer.Navigator>
