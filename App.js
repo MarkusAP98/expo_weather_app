@@ -31,8 +31,8 @@ export default function App() {
   }, []);
 
   const spin = spinValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '360deg']
+    inputRange: [0, 1, 2],
+    outputRange: ['0deg', '360deg', "0deg"]
   });
 
   return (
