@@ -18,7 +18,6 @@ function HomeScreen({ navigation, spin }) {
   return (
     <Summer spin={spin}>
       <Text>Home Screen</Text>
-      <Weather />
     </Summer>
   );
 }
