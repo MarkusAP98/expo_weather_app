@@ -45,7 +45,6 @@ export default function App() {
         <Drawer.Screen name="Home">
           {(props) => <HomeScreen {...props} spin={spin} />}
         </Drawer.Screen>
-        <Drawer.Screen name="Weather" component={Weather} />  
         <Drawer.Screen name="UserInput" component={UserInput} />  
       </Drawer.Navigator>
     </NavigationContainer>
