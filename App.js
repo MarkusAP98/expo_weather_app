@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
-import { Winter, Spring, Summer, Fall, Weather, UserInput } from "./components";
+import { Winter, Spring, Summer, Fall, UserInput } from "./components";
 
 const Drawer = createDrawerNavigator();
 
