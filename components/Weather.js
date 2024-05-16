@@ -53,12 +53,16 @@ const Weather = () => {
         disabled={loading}
       />
       {weatherData && (
-        <View>
-          <Text>🌡️ {Math.round(weatherData.main.temp - 273.15)}°C</Text>
-          <Text>☁️ {weatherData.weather[0].main}</Text>
-          <Text>💬 {weatherData.weather[0].description}</Text>
-          <Text>💨 {weatherData.wind.speed} m/s</Text>
-        </View>
+        <View style={styles.container}>
+        {weatherData && (
+          <View style={styles.weatherContainer}>
+            <Text style={styles.temperatureText}>🌡️ {Math.round(weatherData.main.temp - 273.15)}°C</Text>
+            <Text style={styles.weatherText}>☁️ {weatherData.weather[0].main}</Text>
+            <Text style={styles.descriptionText}>💬 {weatherData.weather[0].description}</Text>
+            <Text style={styles.windText}>💨 {weatherData.wind.speed} m/s</Text>
+          </View>
+        )}
+      </View>
       )}
     </View>
   );
@@ -69,12 +73,39 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     padding: 16,
+    backgroundColor: '#f5f5f5',
   },
   input: {
     height: 40,
-    borderColor: "gray",
+    borderColor: 'gray',
     borderWidth: 1,
-    marginBottom: 16,
+    marginBottom: 10,
+    paddingLeft: 10,
+    borderRadius: 5,
+  },
+  weatherContainer: {
+    marginTop: 20,
+    borderColor: '#d3d3d3',
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 10,
+    backgroundColor: '#fff',
+  },
+  temperatureText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  weatherText: {
+    fontSize: 16,
+    marginTop: 10,
+  },
+  descriptionText: {
+    fontSize: 16,
+    marginTop: 10,
+  },
+  windText: {
+    fontSize: 16,
+    marginTop: 10,
   },
 });
 
