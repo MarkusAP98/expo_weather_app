@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import { View, TextInput, Button, StyleSheet, Text } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-function UserInput() {
+function UserInput({ navigation }) {
   const [name, setName] = useState("");
   const [city, setCity] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = () => {
-    setSubmitted(true);
+  const handleSubmit = async () => {
+    try{
+      await AsyncStorage.setItem("name", name);
+      await AsyncStorage.setItem("city", city);
+      navigation.navigate("Home", { name, city });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

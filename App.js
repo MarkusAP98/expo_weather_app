@@ -10,14 +10,54 @@ import {
 } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
-import { Winter, Spring, Summer, Fall, Weather, UserInput } from "./components";
+import { Winter, Spring, Summer, Fall, UserInput } from "./components";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Drawer = createDrawerNavigator();
 
-function HomeScreen({ navigation, spin }) {
+function HomeScreen({ navigation, spin, route }) {
+  const [name, setName] = useState(null);
+  const [city, setCity] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const name = await AsyncStorage.getItem("name");
+        const city = await AsyncStorage.getItem("city");
+        if (name !== null && city !== null) {
+          // We have data!!
+          setName(name);
+          setCity(city);
+        }
+      } catch (error) {
+        // Error retrieving data
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <Summer spin={spin}>
-      <Text>Home Screen</Text>
+      {name && city && (
+        <Text
+          style={{
+            color: "white",
+            fontSize: 20,
+            textShadowColor: "rgba(0, 0, 0, 0.75)",
+            textShadowOffset: { width: -1, height: 1 },
+            textShadowRadius: 10,
+            textAlign: "center",
+            fontWeight: 700,
+            position: "absolute",
+            top: 50,
+            left: 5,
+            transform: [{ rotate: "-15deg" }],  
+          }}
+        >
+          {" "}
+          Hi There {name}👋
+        </Text>
+      )}
     </Summer>
   );
 }
@@ -45,11 +85,19 @@ export default function App() {
         <Drawer.Screen name="Home">
           {(props) => <HomeScreen {...props} spin={spin} />}
         </Drawer.Screen>
-        <Drawer.Screen name="Weather" component={Weather} />  
-        <Drawer.Screen name="UserInput" component={UserInput} />  
+        <Drawer.Screen name="UserInput" component={UserInput} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  name: {
+    fontSize: 24,
+    color: "#841584",
+    textAlign: "center",
+  },
+  navigation: {
+    backgroundColor: "#f5f5f5",
+  },
+});
