@@ -38,11 +38,25 @@ function HomeScreen({ navigation, spin, route }) {
   }, []);
   return (
     <Summer spin={spin}>
-      <Text>Home Screen</Text>
       {name && city && (
-        <Text style={{ marginBottom: 10 }}>
-        Welcome {name} from {city}!
-      </Text>
+        <Text
+          style={{
+            color: "white",
+            fontSize: 20,
+            textShadowColor: "rgba(0, 0, 0, 0.75)",
+            textShadowOffset: { width: -1, height: 1 },
+            textShadowRadius: 10,
+            textAlign: "center",
+            fontWeight: 700,
+            position: "absolute",
+            top: 50,
+            left: 5,
+            transform: [{ rotate: "-15deg" }],  
+          }}
+        >
+          {" "}
+          Hi There {name}👋
+        </Text>
       )}
     </Summer>
   );
