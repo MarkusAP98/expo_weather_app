@@ -14,10 +14,12 @@ import { Winter, Spring, Summer, Fall, UserInput } from "./components";
 
 const Drawer = createDrawerNavigator();
 
-function HomeScreen({ navigation, spin }) {
+function HomeScreen({ navigation, spin, route }) {
+  const { name, city } = route.params || {};
   return (
     <Summer spin={spin}>
       <Text>Home Screen</Text>
+      <Text>{name && `Hello there, ${name}!`}</Text>
     </Summer>
   );
 }

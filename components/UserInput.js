@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { View, TextInput, Button, StyleSheet, Text } from "react-native";
 
-function UserInput() {
+function UserInput({ navigation }) {
   const [name, setName] = useState("");
   const [city, setCity] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = () => {
-    setSubmitted(true);
+    navigation.navigate("Home", { name, city });
   };
 
   return (
