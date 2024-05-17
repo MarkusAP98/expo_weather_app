@@ -9,7 +9,7 @@ import {
   Alert,
 } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useFocusEffect } from "@react-navigation/native";
 import { Winter, Spring, Summer, Fall, UserInput } from "./components";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -19,23 +19,24 @@ function HomeScreen({ navigation, spin, route }) {
   const [name, setName] = useState(null);
   const [city, setCity] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const name = await AsyncStorage.getItem("name");
-        const city = await AsyncStorage.getItem("city");
-        if (name !== null && city !== null) {
-          // We have data!!
-          setName(name);
-          setCity(city);
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchData = async () => {
+        try {
+          const storedName = await AsyncStorage.getItem("name");
+          const storedCity = await AsyncStorage.getItem("city");
+          if (storedName !== null && storedCity !== null) {
+            setName(storedName);
+            setCity(storedCity);
+          }
+        } catch (error) {
+          // Error retrieving data
         }
-      } catch (error) {
-        // Error retrieving data
-      }
-    };
+      };
 
-    fetchData();
-  }, []);
+      fetchData();
+    }, [route.params])
+  );
   return (
     <Summer spin={spin}>
       {name && city && (
@@ -51,11 +52,11 @@ function HomeScreen({ navigation, spin, route }) {
             position: "absolute",
             top: 50,
             left: 5,
-            transform: [{ rotate: "-15deg" }],  
+            transform: [{ rotate: "-15deg" }],
           }}
         >
           {" "}
-          Hi There {name}👋
+          Hi There {name}👋 {city}
         </Text>
       )}
     </Summer>
