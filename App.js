@@ -11,15 +11,39 @@ import {
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import { Winter, Spring, Summer, Fall, UserInput } from "./components";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Drawer = createDrawerNavigator();
 
 function HomeScreen({ navigation, spin, route }) {
-  const { name, city } = route.params || {};
+  const [name, setName] = useState(null);
+  const [city, setCity] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const name = await AsyncStorage.getItem("name");
+        const city = await AsyncStorage.getItem("city");
+        if (name !== null && city !== null) {
+          // We have data!!
+          setName(name);
+          setCity(city);
+        }
+      } catch (error) {
+        // Error retrieving data
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <Summer spin={spin}>
       <Text>Home Screen</Text>
-      <Text>{name && `Hello there, ${name}!`}</Text>
+      {name && city && (
+        <Text style={{ marginBottom: 10 }}>
+        Welcome {name} from {city}!
+      </Text>
+      )}
     </Summer>
   );
 }
@@ -47,10 +71,19 @@ export default function App() {
         <Drawer.Screen name="Home">
           {(props) => <HomeScreen {...props} spin={spin} />}
         </Drawer.Screen>
-        <Drawer.Screen name="UserInput" component={UserInput} />  
+        <Drawer.Screen name="UserInput" component={UserInput} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  name: {
+    fontSize: 24,
+    color: "#841584",
+    textAlign: "center",
+  },
+  navigation: {
+    backgroundColor: "#f5f5f5",
+  },
+});
