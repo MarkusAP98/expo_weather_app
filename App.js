@@ -92,11 +92,6 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  name: {
-    fontSize: 24,
-    color: "#841584",
-    textAlign: "center",
-  },
   navigation: {
     backgroundColor: "#f5f5f5",
   },
