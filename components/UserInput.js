@@ -5,30 +5,45 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 function UserInput({ navigation }) {
   const [name, setName] = useState("");
   const [city, setCity] = useState("");
+  const [error, setError] = useState(null);
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async () => {
-    try{
+    if (!name || !city) {
+      setError("Both Name and City are required!");
+      return;
+    }
+    try {
       await AsyncStorage.setItem("name", name);
       await AsyncStorage.setItem("city", city);
       navigation.navigate("Home", { name, city });
+      setSubmitted(true);
     } catch (error) {
+      setError("There was an error saving your data!");
       console.error(error);
     }
   };
 
   return (
     <View style={styles.container}>
+      {error && <Text style={styles.text}>{error}</Text>}
       <TextInput
         style={styles.input}
-        placeholder="Enter your name"
-        onChangeText={(text) => setName(text)}
+        onChangeText={(text) => {
+          setName(text);
+          setSubmitted(false);
+          setError(null);
+        }}
         defaultValue={name}
       />
       <TextInput
         style={styles.input}
         placeholder="Enter your city"
-        onChangeText={(text) => setCity(text)}
+        onChangeText={(text) => {
+          setCity(text);
+          setSubmitted(false);
+          setError(null);
+        }}
         defaultValue={city}
       />
       <Button onPress={handleSubmit} title="Submit" color="#841584" />
@@ -36,6 +51,13 @@ function UserInput({ navigation }) {
         <View>
           <Text style={styles.text}>Hello there, {name}!</Text>
           <Text style={styles.text}> You live in {city}.</Text>
+        </View>
+      )}
+      {submitted && (
+        <View>
+          <Text style={styles.text}>
+            Your data has been saved successfully!
+          </Text>
         </View>
       )}
     </View>
@@ -60,7 +82,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   text: {
-    marginTop: 20,
+    marginTop: 0,
     fontSize: 18,
     color: "#841584",
     textAlign: "center",
